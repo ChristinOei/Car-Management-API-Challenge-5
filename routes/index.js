@@ -3,12 +3,12 @@ const router = require("express").Router();
 const swaggerUi = require("swagger-ui-express");
 // import file json
 
-const swaggerDocument = require("../controller/docs/swagger.json");
+const swaggerDocument = require("../docs/swagger.json");
 // API docs => dokumentasi API
 router.use("/api-docs", swaggerUi.serve);
 router.use("/api-docs", swaggerUi.setup(swaggerDocument));
 
-const admin = require("./adminProduct");
+const admin = require("./adminproduct");
 const user = require("./users");
 const shop = require("./shops");
 const product = require("./product");

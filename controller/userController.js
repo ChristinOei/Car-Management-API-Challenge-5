@@ -95,7 +95,40 @@ async function deleteUser(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { username, password } = req.body;
+    //const { username, password } = req.body;
+    //buat Validasi
+    const name = await users.findOne({
+      where: {
+        username,
+      },
+    });
+
+    if (!name) {
+      res.status(201).json({
+        status: "success",
+        data: {
+          user: newUser,
+        },
+      });
+    } else {
+      res.status(400).json({
+        status: "failed",
+        message: `nama ${username} sudah ada`,
+      });
+
+      //VALIDASI 2
+    }
+    if (notAvailable) {
+      res.status(400).json({
+        status: "failed",
+        message: `Data dengan ${username} melebihi ketentuan`,
+      });
+    } else if (lengthName > 20) {
+      res.status(400).json({
+        status: "failed",
+        message: `Username terlalu panjang`,
+      });
+    }
 
     console.log(password);
     console.log(users.password);
